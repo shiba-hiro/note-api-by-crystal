@@ -1,0 +1,27 @@
+name: note-api-by-crystal
+version: 0.1.0
+
+authors:
+  - Shibata Hirofumi <shiba-hiro>
+
+targets:
+  note-api-by-crystal:
+    main: src/note-api.cr
+
+crystal: 0.24.2
+
+license: MIT
+
+dependencies:
+  kemal:
+    github: kemalcr/kemal
+    branch: master
+  mysql:
+    github: crystal-lang/crystal-mysql
+  crecto:
+    github: fridgerator/crecto
+
+development_dependencies:
+    spec-kemal:
+      github: kemalcr/spec-kemal
+      branch: master

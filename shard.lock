@@ -1,0 +1,30 @@
+version: 1.0
+shards:
+  crecto:
+    github: fridgerator/crecto
+    version: 0.8.5
+
+  db:
+    github: crystal-lang/crystal-db
+    version: 0.5.0
+
+  kemal:
+    github: kemalcr/kemal
+    commit: f3f7e319ae8146b474569c18a2062bee0b1f79d5
+
+  kilt:
+    github: jeromegn/kilt
+    version: 0.4.0
+
+  mysql:
+    github: crystal-lang/crystal-mysql
+    version: 0.4.0
+
+  radix:
+    github: luislavena/radix
+    version: 0.3.8
+
+  spec-kemal:
+    github: kemalcr/spec-kemal
+    commit: 93ab608228ea6619d15555d1c77a3bcff29f1dba
+
