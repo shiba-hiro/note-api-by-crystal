@@ -45,6 +45,71 @@ X-Powered-By: Kemal
 ```
 
 
+## Usage
+
+note-api supports simple CRUD operations.
+
+```
+$ http POST http://localhost:3000/v1/notes title="My First Note" content="I started to take note."
+HTTP/1.1 201 Created
+Connection: keep-alive
+Content-Length: 195
+Content-Type: application/json
+X-Powered-By: Kemal
+
+{
+    "content": "I started to take note.", 
+    "created_at": "2018-06-13T14:58:38.231+00:00", 
+    "id": "bf8f34a5-4374-4a18-9704-8c3aa29d336d", 
+    "title": "My First Note", 
+    "updated_at": "2018-06-13T14:58:38.231+00:00"
+}
+```
+
+```
+$ http GET http://localhost:3000/v1/notes/bf8f34a5-4374-4a18-9704-8c3aa29d336d
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 195
+Content-Type: application/json
+X-Powered-By: Kemal
+
+{
+    "content": "I started to take note.", 
+    "created_at": "2018-06-13T14:58:38.231+00:00", 
+    "id": "bf8f34a5-4374-4a18-9704-8c3aa29d336d", 
+    "title": "My First Note", 
+    "updated_at": "2018-06-13T14:58:38.231+00:00"
+}
+```
+
+```
+$ http PUT http://localhost:3000/v1/notes/bf8f34a5-4374-4a18-9704-8c3aa29d336d title="My First Note" content="I started to take note. But it's difficult to continue everyday..."
+HTTP/1.1 200 OK
+Connection: keep-alive
+Content-Length: 238
+Content-Type: application/json
+X-Powered-By: Kemal
+
+{
+    "content": "I started to take note. But it's difficult to continue everyday...", 
+    "created_at": "2018-06-13T14:58:38.231+00:00", 
+    "id": "bf8f34a5-4374-4a18-9704-8c3aa29d336d", 
+    "title": "My First Note", 
+    "updated_at": "2018-06-13T15:03:40.739+00:00"
+}
+```
+
+```
+$ http DELETE http://localhost:3000/v1/notes/bf8f34a5-4374-4a18-9704-8c3aa29d336d
+HTTP/1.1 204 No Content
+Connection: keep-alive
+Content-Length: 0
+Content-Type: application/json
+X-Powered-By: Kemal
+```
+
+
 ## Test
 
 Execute command.
