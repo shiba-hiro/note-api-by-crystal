@@ -14,8 +14,8 @@ license: MIT
 
 dependencies:
   kemal:
-    github: kemalcr/kemal
-    branch: master
+    github: shiba-hiro/kemal
+    branch: ex-mapper
   mysql:
     github: crystal-lang/crystal-mysql
   crecto:

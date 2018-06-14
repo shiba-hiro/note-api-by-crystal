@@ -8,11 +8,7 @@ get "/v1/notes" do |env|
 end
 
 post "/v1/notes" do |env|
-  begin
-    post_note = Interface::NoteUpsertRequest.from_json(env.request.body.as(IO))
-  rescue e
-    halt env, status_code: 422, response: {message: e.to_s}.to_json
-  end
+  post_note = Interface::NoteUpsertRequest.from_request(env)
 
   note = Model::Note.new
   note.id = UUID.random.to_s
@@ -48,11 +44,7 @@ get "/v1/notes/:id" do |env|
 end
 
 put "/v1/notes/:id" do |env|
-  begin
-    put_note = Interface::NoteUpsertRequest.from_json(env.request.body.as(IO))
-  rescue e
-    halt env, status_code: 422, response: {message: e.to_s}.to_json
-  end
+  put_note = Interface::NoteUpsertRequest.from_request(env)
   id = env.params.url["id"]
 
   begin

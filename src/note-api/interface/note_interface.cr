@@ -4,6 +4,12 @@ module Interface
       title:   String,
       content: String,
     })
+
+    def self.from_request(context : HTTP::Server::Context)
+      from_json(context.request.body.as(IO))
+    rescue e
+      raise Exceptions::InvalidRequestFormat.new body_name: name, cause: e
+    end
   end
 
   class NoteResponse
