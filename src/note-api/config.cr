@@ -5,3 +5,5 @@ module Config
   MYSQL_USER = "note_db_user"
   MYSQL_PASS = "note_db_pass"
 end
+
+LOGGER = Logger.new(STDOUT)

@@ -2,7 +2,7 @@ get "/v1/notes" do |env|
   begin
     Repo.all(Model::Note).map { |note| Interface::NoteResponse.new(note) }.to_json
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
 end
@@ -21,7 +21,7 @@ post "/v1/notes" do |env|
   begin
     changeset = Repo.insert(note)
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
 
@@ -36,7 +36,7 @@ get "/v1/notes/:id" do |env|
   begin
     note = Repo.get(Model::Note, env.params.url["id"])
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
 
@@ -58,7 +58,7 @@ put "/v1/notes/:id" do |env|
   begin
     old_note = Repo.get(Model::Note, id)
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
   halt env, status_code: 404, response: {message: "Note doesn't exist."}.to_json if old_note.nil?
@@ -70,7 +70,7 @@ put "/v1/notes/:id" do |env|
   begin
     changeset = Repo.update(note)
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
 
@@ -86,7 +86,7 @@ delete "/v1/notes/:id" do |env|
   begin
     note = Repo.get(Model::Note, env.params.url["id"])
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
   halt env, status_code: 204 if note.nil?
@@ -94,7 +94,7 @@ delete "/v1/notes/:id" do |env|
   begin
     changeset = Repo.delete(note)
   rescue e
-    log(e.to_s)
+    LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: {message: "Internal server error."}.to_json
   end
 

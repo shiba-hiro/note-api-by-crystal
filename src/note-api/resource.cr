@@ -5,7 +5,8 @@ get "/health-check" do |env|
     Repo.raw_scalar("SELECT CURRENT_TIMESTAMP();")
     db_state = {message: "Database is available.", success: true}
   rescue e
-    log(e.to_s)
+    LOGGER.fatal("Database is not available because of #{e.class}")
+    LOGGER.fatal(e.inspect_with_backtrace)
     db_state = {message: "Database is available.", success: false}
   end
 
