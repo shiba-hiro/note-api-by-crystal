@@ -10,7 +10,7 @@ get "/health-check" do |env|
     db_state = {message: "Database is available.", success: false}
   end
 
-  halt env, status_code: 200, response: {app: app_state, db_connection: db_state}.to_json
+  halt env, status_code: 200, response: Hash{"app" => app_state, "db_connection" => db_state}.to_json
 end
 
 require "./resource/*"

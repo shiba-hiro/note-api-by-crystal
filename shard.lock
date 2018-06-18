@@ -2,7 +2,7 @@ version: 1.0
 shards:
   crecto:
     github: fridgerator/crecto
-    version: 0.8.5
+    version: 0.8.7
 
   db:
     github: crystal-lang/crystal-db
@@ -10,7 +10,7 @@ shards:
 
   kemal:
     github: kemalcr/kemal
-    commit: f3f7e319ae8146b474569c18a2062bee0b1f79d5
+    version: 0.23.0
 
   kilt:
     github: jeromegn/kilt
@@ -18,7 +18,7 @@ shards:
 
   mysql:
     github: crystal-lang/crystal-mysql
-    version: 0.4.0
+    version: 0.5.0
 
   radix:
     github: luislavena/radix
@@ -26,5 +26,5 @@ shards:
 
   spec-kemal:
     github: kemalcr/spec-kemal
-    commit: 93ab608228ea6619d15555d1c77a3bcff29f1dba
+    version: 0.4.0
 

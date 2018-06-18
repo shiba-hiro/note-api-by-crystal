@@ -3,7 +3,7 @@ get "/v1/notes" do |env|
     Repo.all(Model::Note).map { |note| Interface::NoteResponse.new(note) }.to_json
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
 end
 
@@ -11,7 +11,7 @@ post "/v1/notes" do |env|
   begin
     post_note = Interface::NoteUpsertRequest.from_json(env.request.body.as(IO))
   rescue e
-    halt env, status_code: 422, response: {message: e.to_s}.to_json
+    halt env, status_code: 422, response: Hash{"message" => e.to_s}.to_json
   end
 
   note = Model::Note.new
@@ -22,7 +22,7 @@ post "/v1/notes" do |env|
     changeset = Repo.insert(note)
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
 
   if changeset.errors.empty?
@@ -37,11 +37,11 @@ get "/v1/notes/:id" do |env|
     note = Repo.get(Model::Note, env.params.url["id"])
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
 
   if note.nil?
-    halt env, status_code: 404, response: {message: "Note doesn't exist."}.to_json
+    halt env, status_code: 404, response: Hash{"message" => "Note doesn't exist."}.to_json
   else
     halt env, status_code: 200, response: Interface::NoteResponse.new(note).to_json
   end
@@ -51,7 +51,7 @@ put "/v1/notes/:id" do |env|
   begin
     put_note = Interface::NoteUpsertRequest.from_json(env.request.body.as(IO))
   rescue e
-    halt env, status_code: 422, response: {message: e.to_s}.to_json
+    halt env, status_code: 422, response: Hash{"message" => e.to_s}.to_json
   end
   id = env.params.url["id"]
 
@@ -59,9 +59,9 @@ put "/v1/notes/:id" do |env|
     old_note = Repo.get(Model::Note, id)
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
-  halt env, status_code: 404, response: {message: "Note doesn't exist."}.to_json if old_note.nil?
+  halt env, status_code: 404, response: Hash{"message" => "Note doesn't exist."}.to_json if old_note.nil?
 
   note = Model::Note.new
   note.id = id
@@ -71,7 +71,7 @@ put "/v1/notes/:id" do |env|
     changeset = Repo.update(note)
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
 
   if changeset.errors.empty?
@@ -87,7 +87,7 @@ delete "/v1/notes/:id" do |env|
     note = Repo.get(Model::Note, env.params.url["id"])
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
   halt env, status_code: 204 if note.nil?
 
@@ -95,7 +95,7 @@ delete "/v1/notes/:id" do |env|
     changeset = Repo.delete(note)
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
-    halt env, status_code: 500, response: {message: "Internal server error."}.to_json
+    halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
 
   if changeset.errors.empty?

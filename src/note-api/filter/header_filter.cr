@@ -3,6 +3,6 @@ before_all do |env|
 
   some_header = env.request.headers["some_header"]?
   if some_header.to_s.empty?
-    reject env, status_code: 400, response: {message: "some_header is needed."}.to_json
+    reject env, status_code: 400, response: Hash{"message" => "some_header is needed."}.to_json
   end
 end
