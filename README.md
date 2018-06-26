@@ -112,11 +112,13 @@ X-Powered-By: Kemal
 
 ## Test
 
-Execute command.
+A. Execute spec programs  
 ```
 $ KEMAL_ENV=test crystal spec
 ```
 
+B. Execute newman script  
+You can refer [here](https://github.com/shiba-hiro/note-newman-test).
 
 ## Run as a Docker container
 
