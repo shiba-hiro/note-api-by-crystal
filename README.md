@@ -124,7 +124,6 @@ You can refer [here](https://github.com/shiba-hiro/note-newman-test).
 
 Insert environment variables on run phase.
 ```
-$ crystal build src/note-api.cr --release
 $ sudo docker build . -t note-api
 $ sudo docker run -dt -p 80:80 -e PORT=80 -e MYSQL_HOST=0.0.0.0 -e KEMAL_ENV=production --name note-api note-api
 ```

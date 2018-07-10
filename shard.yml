@@ -5,10 +5,10 @@ authors:
   - Shibata Hirofumi <shiba-hiro>
 
 targets:
-  note-api-by-crystal:
+        note-api:
     main: src/note-api.cr
 
-crystal: 0.25.0
+crystal: 0.25.1
 
 license: MIT
 
