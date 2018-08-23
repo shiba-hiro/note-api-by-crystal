@@ -56,15 +56,13 @@ put "/v1/notes/:id" do |env|
   id = env.params.url["id"]
 
   begin
-    old_note = Repo.get(Model::Note, id)
+    note = Repo.get(Model::Note, id)
   rescue e
     LOGGER.error(e.inspect_with_backtrace)
     halt env, status_code: 500, response: Hash{"message" => "Internal server error."}.to_json
   end
-  halt env, status_code: 404, response: Hash{"message" => "Note doesn't exist."}.to_json if old_note.nil?
+  halt env, status_code: 404, response: Hash{"message" => "Note doesn't exist."}.to_json if note.nil?
 
-  note = Model::Note.new
-  note.id = id
   note.title = put_note.title
   note.content = put_note.content
   begin
@@ -75,7 +73,6 @@ put "/v1/notes/:id" do |env|
   end
 
   if changeset.errors.empty?
-    note.created_at = old_note.created_at
     halt env, status_code: 200, response: Interface::NoteResponse.new(note).to_json
   else
     halt env, status_code: 400, response: changeset.errors.to_json

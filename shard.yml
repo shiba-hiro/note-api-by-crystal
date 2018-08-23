@@ -8,7 +8,7 @@ targets:
   note-api:
     main: src/note-api.cr
 
-crystal: 0.25.1
+crystal: 0.26.0
 
 license: MIT
 
